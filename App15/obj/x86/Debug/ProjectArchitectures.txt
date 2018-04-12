@@ -1,0 +1,1 @@
+C:\UWPprojects\FlightLines\App15\FlightMap.csproj;x86

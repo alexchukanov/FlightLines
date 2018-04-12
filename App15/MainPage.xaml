@@ -1,0 +1,36 @@
+﻿<Page
+    x:Class="App15.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App15"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
+
+    mc:Ignorable="d">
+
+    <Grid x:Name="pageGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>           
+        </Grid.RowDefinitions>
+
+        <Maps:MapControl
+           x:Name="map"            
+           ZoomInteractionMode="GestureAndControl"
+           TiltInteractionMode="GestureAndControl"   
+           MapServiceToken="use your own key"
+         >
+        <ProgressRing Name="prRing"  Maps:MapControl.Location="{Binding ElementName=map, Path=Center}" Maps:MapControl.NormalizedAnchorPoint="0.5 0.5" Height="50" Width="50"/>
+
+        </Maps:MapControl>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <Button Content="Load" Click="ButtonLoad_Click" Margin="5"/>
+            <TextBox Name="tbMaxNumber" Text="8000" Margin="5"/>
+            <TextBlock Text="max TRA lines" Margin="5" VerticalAlignment="Center"/>
+            <Button Content="Clear" Click="ButtonClear_Click" Margin="5"/>
+         </StackPanel>
+
+    </Grid>
+</Page>
