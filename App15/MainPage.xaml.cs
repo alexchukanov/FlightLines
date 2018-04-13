@@ -86,12 +86,10 @@ namespace App15
                     new BasicGeoposition() {Latitude=feature.geometry.coordinates[1][1], Longitude=feature.geometry.coordinates[1][0]},
                 }),
                     StrokeColor = Colors.DarkBlue,
-                    StrokeThickness = 3,
+                    StrokeThickness = 1,
                     StrokeDashed = true,
                 };
-
-                //featureList.Add(mapPolyline);
-
+                                
                 map.MapElements.Add(mapPolyline);
 
 

@@ -388,6 +388,9 @@
     <AppxPackagedFile Include="C:\Users\alexc\.nuget\packages\system.xml.xmlserializer\4.0.11\lib\netcore50\System.Xml.XmlSerializer.dll">
       <PackagePath>System.Xml.XmlSerializer.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\UWPprojects\FlightLines\App15\FlightLinesScreen.jpg">
+      <PackagePath>FlightLinesScreen.jpg</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\UWPprojects\FlightLines\App15\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
     </AppxPackagedFile>

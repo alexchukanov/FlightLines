@@ -447,3 +447,4 @@ C:\UWPprojects\FlightLines\App15\obj\x86\Debug\qualifiers.txt
 C:\UWPprojects\FlightLines\App15\obj\x86\Debug\qualifiers.txt.intermediate
 C:\UWPprojects\FlightLines\App15\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\UWPprojects\FlightLines\App15\obj\x86\Debug\ProjectArchitectures.txt
+C:\UWPprojects\FlightLines\App15\obj\x86\Debug\FlightMap.csprojResolveAssemblyReference.cache
