@@ -106,6 +106,7 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="App15_TemporaryKey.pfx" />
+    <None Include="TRA.geojson" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\Default.rd.xml" />
