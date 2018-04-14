@@ -18,18 +18,19 @@
         <Maps:MapControl x:ConnectionId='2'
            x:Name="map"            
            ZoomInteractionMode="GestureAndControl"
-           TiltInteractionMode="GestureAndControl"   
+           TiltInteractionMode="GestureAndControl" 
+           MapProjection="Globe"
            MapServiceToken="use your own key"
          >
-        <ProgressRing x:ConnectionId='6' Name="prRing"  Maps:MapControl.Location="{Binding ElementName=map, Path=Center}" Maps:MapControl.NormalizedAnchorPoint="0.5 0.5" Height="50" Width="50"/>
+        <ProgressRing x:ConnectionId='5' Name="prRing"  Maps:MapControl.Location="{Binding ElementName=map, Path=Center}" Maps:MapControl.NormalizedAnchorPoint="0.5 0.5" Height="50" Width="50"/>
+        <Image Source="Assets/sniper-6.png" Maps:MapControl.Location="{Binding ElementName=map, Path=Center}" Maps:MapControl.NormalizedAnchorPoint="0.5 0.5"/>
 
         </Maps:MapControl>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1">
             <Button x:ConnectionId='3' Content="Load"                          Margin="5"/>
             <TextBox x:ConnectionId='4' Name="tbMaxNumber" Text="8000" Margin="5"/>
-            <TextBlock Text="max TRA lines" Margin="5" VerticalAlignment="Center"/>
-            <Button x:ConnectionId='5' Content="Clear"                           Margin="5"/>
+            <TextBlock Text="max TRA lines" Margin="5" VerticalAlignment="Center"/>            
          </StackPanel>
 
     </Grid>

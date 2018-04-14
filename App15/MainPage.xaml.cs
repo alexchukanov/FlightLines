@@ -30,6 +30,7 @@ namespace App15
     public sealed partial class MainPage : Page
     {
         List<MapElement> featureList = null;
+        MapElementsLayer mapElementsLayer = null;
 
         int maxNumberLines = 0;
 
@@ -37,16 +38,13 @@ namespace App15
         {
             this.InitializeComponent();
         }
-        
 
         private async void ButtonLoad_Click(object sender, RoutedEventArgs e)
         {
-
-            if (map.MapElements.Count() != 0)
+            if (map.Layers.Count() != 0)
             {
-                return;
+                //return;
             }
-           
 
             if (!int.TryParse(tbMaxNumber.Text, out maxNumberLines))
             {
@@ -60,52 +58,58 @@ namespace App15
             openPicker.ViewMode = PickerViewMode.Thumbnail;
             openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
             openPicker.FileTypeFilter.Add(".geojson");
-                      
-
             StorageFile file = await openPicker.PickSingleFileAsync();
 
-            prRing.IsActive = true;
-
-
-            string text = await Windows.Storage.FileIO.ReadTextAsync(file);
-
-            var responseStatus = Newtonsoft.Json.JsonConvert.DeserializeObject<Rootobject>(text);
-
-            Feature [] featureArr = responseStatus.features;
-
-            int i = 0;
-                        
-
-            foreach (var feature in featureArr)
+            if (file != null)
             {
-                var mapPolyline = new MapPolyline
+                prRing.IsActive = true;
 
+                string text = await Windows.Storage.FileIO.ReadTextAsync(file);
+
+                var responseStatus = Newtonsoft.Json.JsonConvert.DeserializeObject<Rootobject>(text);
+
+                Feature[] featureArr = responseStatus.features;
+
+                int i = 0;
+
+                var mapElementList = new List<MapElement>();
+
+
+                foreach (var feature in featureArr)
                 {
-                    Path = new Geopath(new List<BasicGeoposition> {
+                    MapElement mapPolyline = new MapPolyline
+
+                    {
+                        Path = new Geopath(new List<BasicGeoposition> {
                     new BasicGeoposition() {Latitude=feature.geometry.coordinates[0][1], Longitude=feature.geometry.coordinates[0][0]},
                     new BasicGeoposition() {Latitude=feature.geometry.coordinates[1][1], Longitude=feature.geometry.coordinates[1][0]},
                 }),
-                    StrokeColor = Colors.DarkBlue,
-                    StrokeThickness = 1,
-                    StrokeDashed = true,
-                };
-                                
-                map.MapElements.Add(mapPolyline);
+                        StrokeColor = Colors.DarkBlue,
+                        StrokeThickness = 1,
+                        StrokeDashed = true,
+                    };
 
+                    mapElementList.Add(mapPolyline);
 
-                if (i++ > maxNumberLines)
-                {
-                    break;
+                    if (i++ > maxNumberLines)
+                    {
+                        break;
+                    }
                 }
-            }
-           
-            prRing.IsActive = false;
-        }
 
-        private void ButtonClear_Click(object sender, RoutedEventArgs e)
-        {
-            map.MapElements.Clear();
-            GC.Collect();
+                mapElementsLayer = new MapElementsLayer
+                {
+                    ZIndex = 1,
+                    MapElements = mapElementList
+                };
+
+                map.Layers.Add(mapElementsLayer);
+
+                GC.Collect();
+
+                prRing.IsActive = false;
+            }
+
         }
     }
 }

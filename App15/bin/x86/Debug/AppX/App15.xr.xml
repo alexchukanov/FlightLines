@@ -24,6 +24,7 @@
     <RootType FullName="Windows.UI.Xaml.Controls.Maps.MapControl">
       <RootProperty Name="ZoomInteractionMode" />
       <RootProperty Name="TiltInteractionMode" />
+      <RootProperty Name="MapProjection" />
       <RootProperty Name="MapServiceToken" />
       <RootProperty Name="Children" />
       <RootMethod Name="GetLocation" />
@@ -54,6 +55,9 @@
       <RootProperty Name="Name" />
       <RootProperty Name="Height" />
       <RootProperty Name="Width" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Image">
+      <RootProperty Name="Source" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="ElementName" />
