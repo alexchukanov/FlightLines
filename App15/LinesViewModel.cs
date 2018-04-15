@@ -8,6 +8,7 @@ using Windows.Devices.Geolocation;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Xaml.Controls.Maps;
 
 namespace App15
@@ -27,79 +28,92 @@ namespace App15
             }
         }
 
+        bool isWaiting2 = false;
+        public bool IsWaiting2
+        {
+            get
+            {
+                return isWaiting2;
+            }
+            set
+            {
+                Set(ref isWaiting2, value);
+            }
+        }
+
         public ObservableCollection<MapLayer> MapLinesLayer
         {
             get;
-            set;
+            set;            
         } 
 
         Feature[] featureArr = null;
-        int maxNumberLines = 8000;
+        int maxNumberLines = 18000;
 
         public LinesViewModel()
         {
-            MapLinesLayer = new ObservableCollection<MapLayer>();
+           MapLinesLayer = new ObservableCollection<MapLayer>();
         }
                
         private async void LoadLines(object linesN)
         {
-            IsWaiting = true;
-
-            if (!int.TryParse((string)linesN, out maxNumberLines))
-            {
-                // max 88253 for TRA.geojson file
-                maxNumberLines = 8000;
-            }
+            int.TryParse((string)linesN, out maxNumberLines);            
 
             FileOpenPicker openPicker = new FileOpenPicker();
             openPicker.ViewMode = PickerViewMode.Thumbnail;
             openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
             openPicker.FileTypeFilter.Add(".geojson");
+
             StorageFile file = await openPicker.PickSingleFileAsync();
 
             if (file != null)
             {
+                IsWaiting = true;
+
                 string text = await Windows.Storage.FileIO.ReadTextAsync(file);
 
                 var responseStatus = Newtonsoft.Json.JsonConvert.DeserializeObject<Rootobject>(text);
 
                 featureArr = responseStatus.features;
-            }
 
-            int i = 0;
+                int i = 0;
 
-            var mapElementList = new List<MapElement>();
+                var mapElementList = new List<MapElement>();
 
-            foreach (var feature in featureArr)
-            {
-                MapElement mapPolyline = new MapPolyline
-
+                foreach (var feature in featureArr)
                 {
-                    Path = new Geopath(new List<BasicGeoposition> {
-                    new BasicGeoposition() {Latitude=feature.geometry.coordinates[0][1], Longitude=feature.geometry.coordinates[0][0]},
-                    new BasicGeoposition() {Latitude=feature.geometry.coordinates[1][1], Longitude=feature.geometry.coordinates[1][0]},
-                }),
-                    StrokeColor = Colors.DarkBlue,
-                    StrokeThickness = 1,
-                    StrokeDashed = true,
-                };
+                    MapElement mapPolyline = new MapPolyline
+                    {
+                        Path = new Geopath(new List<BasicGeoposition>
+                        {
+                            new BasicGeoposition() {Latitude=feature.geometry.coordinates[0][1], Longitude=feature.geometry.coordinates[0][0]},
+                            new BasicGeoposition() {Latitude=feature.geometry.coordinates[1][1], Longitude=feature.geometry.coordinates[1][0]},
+                        }),
 
-                mapElementList.Add(mapPolyline);
+                        StrokeColor = Colors.DarkBlue,
+                        StrokeThickness = 1,
+                        StrokeDashed = true,
+                    };
 
-                if (i++ > maxNumberLines)
-                {
-                    IsWaiting = false;
-                    break;
+                    mapElementList.Add(mapPolyline);
+
+                    if (i++ > maxNumberLines)
+                    {
+                        IsWaiting = false;
+                        break;
+                    }
                 }
+
+                MapLinesLayer.Clear();
+                
+                var LandmarksLayer = new MapElementsLayer
+                {
+                    ZIndex = 1,
+                    MapElements = mapElementList
+                };
+                
+                MapLinesLayer.Add(LandmarksLayer);
             }
-
-            var LandmarksLayer = new MapElementsLayer
-            {
-                ZIndex = 1,
-                MapElements = mapElementList
-            };
-
-            MapLinesLayer.Add(LandmarksLayer);
 
             IsWaiting = false;
         }
@@ -124,7 +138,8 @@ namespace App15
                 
         private void ClearLines()
         {
-           MapLinesLayer.Clear();           
+            MapLinesLayer.Clear();
+            GC.Collect();
         }
 
 
@@ -147,14 +162,11 @@ namespace App15
         }
 
         private void HideLines()
-        {
-            
-            int layerN = MapLinesLayer.Count();
-
-            if (layerN > 0)
+        {  
+            if (MapLinesLayer.Count() > 0)
             {
-                MapLinesLayer[layerN - 1].Visible = !MapLinesLayer[layerN - 1].Visible;
-            }
+                MapLinesLayer[0].Visible = !MapLinesLayer[0].Visible;               
+            }            
         }
 
         private RelayCommand hideLinesCommand;
