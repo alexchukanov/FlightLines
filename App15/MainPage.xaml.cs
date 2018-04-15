@@ -29,16 +29,20 @@ namespace App15
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        List<MapElement> featureList = null;
-        MapElementsLayer mapElementsLayer = null;
+       // List<MapElement> featureList = null;
+       // MapElementsLayer mapElementsLayer = null;
+       // int maxNumberLines = 0;
 
-        int maxNumberLines = 0;
+        public LinesViewModel ViewModel { get; set; }
 
         public MainPage()
         {
             this.InitializeComponent();
+            this.ViewModel = new LinesViewModel();
+            DataContext = ViewModel;
         }
 
+        /*
         private async void ButtonLoad_Click(object sender, RoutedEventArgs e)
         {
             if (map.Layers.Count() != 0)
@@ -74,7 +78,6 @@ namespace App15
 
                 var mapElementList = new List<MapElement>();
 
-
                 foreach (var feature in featureArr)
                 {
                     MapElement mapPolyline = new MapPolyline
@@ -109,8 +112,7 @@ namespace App15
 
                 prRing.IsActive = false;
             }
-
-        }
+            */
     }
 }
 

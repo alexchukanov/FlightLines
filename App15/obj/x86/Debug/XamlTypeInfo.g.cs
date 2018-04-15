@@ -180,19 +180,25 @@ namespace App15.FlightMap_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[5];
+            _typeNameTable = new string[8];
             _typeNameTable[0] = "System.Collections.Generic.IList`1<Windows.UI.Xaml.DependencyObject>";
             _typeNameTable[1] = "Windows.UI.Xaml.DependencyObject";
             _typeNameTable[2] = "App15.MainPage";
             _typeNameTable[3] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[4] = "Windows.UI.Xaml.Controls.UserControl";
+            _typeNameTable[5] = "App15.LinesViewModel";
+            _typeNameTable[6] = "App15.Observable";
+            _typeNameTable[7] = "Object";
 
-            _typeTable = new global::System.Type[5];
+            _typeTable = new global::System.Type[8];
             _typeTable[0] = typeof(global::System.Collections.Generic.IList<global::Windows.UI.Xaml.DependencyObject>);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.DependencyObject);
             _typeTable[2] = typeof(global::App15.MainPage);
             _typeTable[3] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[4] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
+            _typeTable[5] = typeof(global::App15.LinesViewModel);
+            _typeTable[6] = typeof(global::App15.Observable);
+            _typeTable[7] = typeof(global::System.Object);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -228,6 +234,8 @@ namespace App15.FlightMap_XamlTypeInfo
         }
 
         private object Activate_2_MainPage() { return new global::App15.MainPage(); }
+        private object Activate_5_LinesViewModel() { return new global::App15.LinesViewModel(); }
+        private object Activate_6_Observable() { return new global::App15.Observable(); }
         private void VectorAdd_0_IList(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::Windows.UI.Xaml.DependencyObject>)instance;
@@ -258,6 +266,7 @@ namespace App15.FlightMap_XamlTypeInfo
             case 2:   //  App15.MainPage
                 userType = new global::App15.FlightMap_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_2_MainPage;
+                userType.AddMemberName("ViewModel");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -269,16 +278,54 @@ namespace App15.FlightMap_XamlTypeInfo
             case 4:   //  Windows.UI.Xaml.Controls.UserControl
                 xamlType = new global::App15.FlightMap_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
+
+            case 5:   //  App15.LinesViewModel
+                userType = new global::App15.FlightMap_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("App15.Observable"));
+                userType.SetIsReturnTypeStub();
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 6:   //  App15.Observable
+                userType = new global::App15.FlightMap_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_6_Observable;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 7:   //  Object
+                xamlType = new global::App15.FlightMap_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
             }
             return xamlType;
         }
 
 
+        private object get_0_MainPage_ViewModel(object instance)
+        {
+            var that = (global::App15.MainPage)instance;
+            return that.ViewModel;
+        }
+        private void set_0_MainPage_ViewModel(object instance, object Value)
+        {
+            var that = (global::App15.MainPage)instance;
+            that.ViewModel = (global::App15.LinesViewModel)Value;
+        }
 
         private global::Windows.UI.Xaml.Markup.IXamlMember CreateXamlMember(string longMemberName)
         {
             global::App15.FlightMap_XamlTypeInfo.XamlMember xamlMember = null;
-            // No Local Properties
+            global::App15.FlightMap_XamlTypeInfo.XamlUserType userType;
+
+            switch (longMemberName)
+            {
+            case "App15.MainPage.ViewModel":
+                userType = (global::App15.FlightMap_XamlTypeInfo.XamlUserType)GetXamlTypeByName("App15.MainPage");
+                xamlMember = new global::App15.FlightMap_XamlTypeInfo.XamlMember(this, "ViewModel", "App15.LinesViewModel");
+                xamlMember.Getter = get_0_MainPage_ViewModel;
+                xamlMember.Setter = set_0_MainPage_ViewModel;
+                break;
+            }
             return xamlMember;
         }
     }
