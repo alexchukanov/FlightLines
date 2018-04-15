@@ -24,17 +24,17 @@
             
                                                     
          >
-            <ProgressRing x:ConnectionId='5' Name="prRing"                                                       Maps:MapControl.Location="{Binding ElementName=map, Path=Center}" Maps:MapControl.NormalizedAnchorPoint="0.5 0.5" Height="50" Width="50"/>
+            <ProgressRing x:ConnectionId='8' Name="prRing"                                                       Maps:MapControl.Location="{Binding ElementName=map, Path=Center}" Maps:MapControl.NormalizedAnchorPoint="0.5 0.5" Height="50" Width="50"/>
             <Image Source="Assets/sniper-6.png" Maps:MapControl.Location="{Binding ElementName=map, Path=Center}" Maps:MapControl.NormalizedAnchorPoint="0.5 0.5"/>
 
         </Maps:MapControl>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <Button Content="Load" Margin="5"  Command="{Binding LoadLinesCommand}" CommandParameter="{Binding ElementName=tbMaxNumber, Path=Text}"/>
-            <TextBox x:ConnectionId='4' Name="tbMaxNumber" Text="8000" Margin="5"/>
+            <Button x:ConnectionId='4' Content="Load" Margin="5"                                                CommandParameter="{Binding ElementName=tbMaxNumber, Path=Text}"/>
+            <TextBox x:ConnectionId='5' Name="tbMaxNumber" Text="8000" Margin="5"/>
             <TextBlock Text="max TRA lines" Margin="5" VerticalAlignment="Center"/>
-            <ToggleButton Content="Hide" Margin="5"  Command="{Binding  HideLinesCommand}" IsChecked="True"/>
-            <Button Content="Clear" Margin="5"  Command="{Binding  ClearLinesCommand}"/>
+            <ToggleButton x:ConnectionId='6' Content="Hide" Margin="5"                                                IsChecked="True"/>
+            <Button x:ConnectionId='7' Content="Clear" Margin="5"                                                 />
             
         </StackPanel>
     </Grid>

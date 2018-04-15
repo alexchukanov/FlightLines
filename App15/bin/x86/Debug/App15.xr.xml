@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Roots >
   <Roots.PropertyPathNames>
-    <RootPropertyPathName Name="ClearLinesCommand" />
-    <RootPropertyPathName Name="HideLinesCommand" />
-    <RootPropertyPathName Name="LoadLinesCommand" />
     <RootPropertyPathName Name="Text" />
     <RootPropertyPathName Name="Center" />
   </Roots.PropertyPathNames>
@@ -63,12 +60,12 @@
       <RootProperty Name="Command" />
       <RootProperty Name="IsChecked" />
     </RootType>
+    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.BindExtension">
+      <RootProperty Name="Mode" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="ElementName" />
       <RootProperty Name="Path" />
-    </RootType>
-    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.BindExtension">
-      <RootProperty Name="Mode" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
       <RootProperty Name="Name" />

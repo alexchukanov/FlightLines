@@ -30,11 +30,11 @@
         </Maps:MapControl>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <Button Content="Load" Margin="5"  Command="{Binding LoadLinesCommand}" CommandParameter="{Binding ElementName=tbMaxNumber, Path=Text}"/>
+            <Button Content="Load" Margin="5"  Command="{x:Bind ViewModel.LoadLinesCommand}" CommandParameter="{Binding ElementName=tbMaxNumber, Path=Text}"/>
             <TextBox Name="tbMaxNumber" Text="8000" Margin="5"/>
             <TextBlock Text="max TRA lines" Margin="5" VerticalAlignment="Center"/>
-            <ToggleButton Content="Hide" Margin="5"  Command="{Binding  HideLinesCommand}" IsChecked="True"/>
-            <Button Content="Clear" Margin="5"  Command="{Binding  ClearLinesCommand}"/>
+            <ToggleButton Content="Hide" Margin="5"  Command="{x:Bind ViewModel.HideLinesCommand}" IsChecked="True"/>
+            <Button Content="Clear" Margin="5"  Command="{x:Bind  ViewModel.ClearLinesCommand}"/>
             
         </StackPanel>
     </Grid>
