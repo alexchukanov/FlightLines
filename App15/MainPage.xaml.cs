@@ -89,8 +89,7 @@ namespace App15
         }
 
         private void projectionCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // Protect against events that are raised before we are fully initialized.
+        {            
             if (map != null)
             {
                 SetMapProjection();
@@ -108,7 +107,64 @@ namespace App15
                     map.MapProjection = MapProjection.Globe;
                     break;
             }
-        }       
+        }
+
+        private void mapTypeCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (map != null)
+            {
+                SetMapType();
+            }
+        }
+
+        private void SetMapType()
+        {
+            map.TileSources.Clear();
+
+            switch (mapTypeCombobox.SelectedIndex)
+            {
+                case 0:
+                    
+                    break;
+                case 1:                   
+                    HttpMapTileDataSource dataSource = new HttpMapTileDataSource();
+                    dataSource.UriRequested += HandleUriRequestAsync;
+                    MapTileSource tileSource = new MapTileSource(dataSource);
+                    map.TileSources.Add(tileSource);
+                    break;
+                case 2:
+                    HttpMapTileDataSource dataSourceArc = new HttpMapTileDataSource();
+                    dataSourceArc.UriRequested += ArcHandleUriRequestAsync;
+                    MapTileSource tileSourceArc = new MapTileSource(dataSourceArc);
+                    map.TileSources.Add(tileSourceArc);
+                    break;
+            }
+        }
+
+        //OSM
+        private  void HandleUriRequestAsync(HttpMapTileDataSource sender, MapTileUriRequestedEventArgs args)
+        {
+            var uri = GetCustomUri(args.X, args.Y, args.ZoomLevel);
+            args.Request.Uri = uri;
+        }
+
+        // Create the custom Uri.
+        private Uri GetCustomUri(int x, int y, int zoomLevel)
+        {
+            return new Uri(String.Format("https://b.tile.openstreetmap.org/{0}/{1}/{2}.png", zoomLevel, x, y));
+        }
+
+        //ArcGis
+        private void ArcHandleUriRequestAsync(HttpMapTileDataSource sender, MapTileUriRequestedEventArgs args)
+        {
+            var uri = ArcGetCustomUri(args.X, args.Y, args.ZoomLevel);
+            args.Request.Uri = uri;
+        }
+                
+        private Uri ArcGetCustomUri(int x, int y, int zoomLevel)
+        {
+            return new Uri(String.Format("http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{0}/{1}/{2}.png", zoomLevel, y, x));
+        }
     }
 }
 

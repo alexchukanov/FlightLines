@@ -42,6 +42,11 @@
                 <ComboBoxItem>Aerial3DWithRoads</ComboBoxItem>
                 <ComboBoxItem>Terrain</ComboBoxItem>
             </ComboBox>
+            <ComboBox Header="Map" Name="mapTypeCombobox" SelectedIndex="0" SelectionChanged="mapTypeCombobox_SelectionChanged" Margin="10 0 0 25"  >
+                <ComboBoxItem>MICROSOFT</ComboBoxItem>
+                <ComboBoxItem>OSM</ComboBoxItem>
+                <ComboBoxItem>ArcGIS</ComboBoxItem>
+            </ComboBox>
             <ComboBox Header="Projection"  Name="projectionCombobox" SelectionChanged="projectionCombobox_SelectionChanged" Margin="10 0 0 25" VerticalAlignment="Top">
                 <ComboBoxItem IsSelected="True">Web Mercator</ComboBoxItem>
                 <ComboBoxItem>Globe</ComboBoxItem>

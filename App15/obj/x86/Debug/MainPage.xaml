@@ -24,7 +24,7 @@
                                                                  
             
          >
-            <ProgressRing x:ConnectionId='10' Name="prRing"                                                       Maps:MapControl.Location="{Binding ElementName=map, Path=Center}" Maps:MapControl.NormalizedAnchorPoint="0.5 0.5" Height="50" Width="50"/>
+            <ProgressRing x:ConnectionId='11' Name="prRing"                                                       Maps:MapControl.Location="{Binding ElementName=map, Path=Center}" Maps:MapControl.NormalizedAnchorPoint="0.5 0.5" Height="50" Width="50"/>
             <Image Source="Assets/sniper-6.png" Maps:MapControl.Location="{Binding ElementName=map, Path=Center}" Maps:MapControl.NormalizedAnchorPoint="0.5 0.5"/>
         </Maps:MapControl>
 
@@ -42,7 +42,12 @@
                 <ComboBoxItem>Aerial3DWithRoads</ComboBoxItem>
                 <ComboBoxItem>Terrain</ComboBoxItem>
             </ComboBox>
-            <ComboBox x:ConnectionId='9' Header="Projection"  Name="projectionCombobox"                                                        Margin="10 0 0 25" VerticalAlignment="Top">
+            <ComboBox x:ConnectionId='9' Header="Map" Name="mapTypeCombobox" SelectedIndex="0"                                                     Margin="10 0 0 25"  >
+                <ComboBoxItem>MICROSOFT</ComboBoxItem>
+                <ComboBoxItem>OSM</ComboBoxItem>
+                <ComboBoxItem>ArcGIS</ComboBoxItem>
+            </ComboBox>
+            <ComboBox x:ConnectionId='10' Header="Projection"  Name="projectionCombobox"                                                        Margin="10 0 0 25" VerticalAlignment="Top">
                 <ComboBoxItem IsSelected="True">Web Mercator</ComboBoxItem>
                 <ComboBoxItem>Globe</ComboBoxItem>
             </ComboBox>
