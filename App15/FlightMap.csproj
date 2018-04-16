@@ -109,6 +109,7 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="App15_TemporaryKey.pfx" />
+    <None Include="Assets\box.3mf" />
     <None Include="TRA.geojson" />
   </ItemGroup>
   <ItemGroup>

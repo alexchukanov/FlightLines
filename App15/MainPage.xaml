@@ -19,24 +19,33 @@
            x:Name="map"            
            ZoomInteractionMode="GestureAndControl"
            TiltInteractionMode="GestureAndControl" 
-           MapProjection="Globe"
            MapServiceToken="use your own key"
-            
+           Loaded="mapLoaded"            
            Layers="{x:Bind ViewModel.MapLinesLayer, Mode=OneWay}"
+            
          >
             <ProgressRing Name="prRing" IsActive="{x:Bind ViewModel.IsWaiting, Mode=OneWay}"  Maps:MapControl.Location="{Binding ElementName=map, Path=Center}" Maps:MapControl.NormalizedAnchorPoint="0.5 0.5" Height="50" Width="50"/>
-            <ProgressRing Name="prRing2" IsActive="{x:Bind ViewModel.IsWaiting2, Mode=OneWay}"  Maps:MapControl.Location="{Binding ElementName=map, Path=Center}" Maps:MapControl.NormalizedAnchorPoint="0.5 0.5" Height="50" Width="50"/>
-
             <Image Source="Assets/sniper-6.png" Maps:MapControl.Location="{Binding ElementName=map, Path=Center}" Maps:MapControl.NormalizedAnchorPoint="0.5 0.5"/>
-
         </Maps:MapControl>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1">
             <Button Content="Load" Margin="5"  Command="{x:Bind ViewModel.LoadLinesCommand}" CommandParameter="{Binding ElementName=tbMaxNumber, Path=Text}"/>
-            <TextBox Name="tbMaxNumber" Text="18000" Margin="5"/>
+            <TextBox Name="tbMaxNumber" Text="18000" Margin="5" Height="25"/>
             <TextBlock Text="max TRA lines" Margin="5" VerticalAlignment="Center"/>
             <ToggleButton Content="Hide" Margin="5"  Command="{x:Bind ViewModel.HideLinesCommand}" IsChecked="True"/>
             <Button Content="Clear" Margin="5"  Command="{x:Bind  ViewModel.ClearLinesCommand}"/>
+            <ComboBox Header="Style" Name="styleCombobox" SelectionChanged="styleCombobox_SelectionChanged" Margin="10 0 0 25" VerticalAlignment="Top">
+                <ComboBoxItem>None</ComboBoxItem>
+                <ComboBoxItem IsSelected="True">Road</ComboBoxItem>
+                <ComboBoxItem>Aerial</ComboBoxItem>
+                <ComboBoxItem>AerialWithRoads</ComboBoxItem>
+                <ComboBoxItem>Aerial3DWithRoads</ComboBoxItem>
+                <ComboBoxItem>Terrain</ComboBoxItem>
+            </ComboBox>
+            <ComboBox Header="Projection"  Name="projectionCombobox" SelectionChanged="projectionCombobox_SelectionChanged" Margin="10 0 0 25" VerticalAlignment="Top">
+                <ComboBoxItem IsSelected="True">Web Mercator</ComboBoxItem>
+                <ComboBoxItem>Globe</ComboBoxItem>
+            </ComboBox>
             
         </StackPanel>
     </Grid>

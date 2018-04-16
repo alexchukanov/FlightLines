@@ -436,7 +436,6 @@ C:\UWPprojects\FlightLines\App15\obj\x86\Debug\qualifiers.txt
 C:\UWPprojects\FlightLines\App15\obj\x86\Debug\qualifiers.txt.intermediate
 C:\UWPprojects\FlightLines\App15\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\UWPprojects\FlightLines\App15\obj\x86\Debug\ProjectArchitectures.txt
-C:\UWPprojects\FlightLines\App15\obj\x86\Debug\FlightMap.csprojResolveAssemblyReference.cache
 C:\UWPprojects\FlightLines\App15\bin\x86\Debug\System.ComponentModel.Composition.dll
 C:\UWPprojects\FlightLines\App15\bin\x86\Debug\System.Configuration.dll
 C:\UWPprojects\FlightLines\App15\bin\x86\Debug\System.Data.SqlClient.dll
@@ -512,3 +511,4 @@ C:\UWPprojects\FlightLines\App15\obj\x86\Debug\FxResources.System.Security.Princ
 C:\UWPprojects\FlightLines\App15\obj\x86\Debug\FxResources.System.Threading.Thread.SR.resw
 C:\UWPprojects\FlightLines\App15\obj\x86\Debug\FxResources.System.Transactions.Local.SR.resw
 C:\UWPprojects\FlightLines\App15\obj\x86\Debug\FxResources.System.ValueTuple.SR.resw
+C:\UWPprojects\FlightLines\App15\obj\x86\Debug\FlightMap.csprojResolveAssemblyReference.cache
