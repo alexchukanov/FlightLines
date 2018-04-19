@@ -28,16 +28,16 @@ namespace App15
             }
         }
 
-        bool isWaiting2 = false;
-        public bool IsWaiting2
+        string message = "";
+        public string Message
         {
             get
             {
-                return isWaiting2;
+                return message;
             }
             set
             {
-                Set(ref isWaiting2, value);
+                Set(ref message, value);
             }
         }
 
@@ -141,8 +141,7 @@ namespace App15
             MapLinesLayer.Clear();
             GC.Collect();
         }
-
-
+                
         private RelayCommand clearLinesCommand;
         public RelayCommand ClearLinesCommand
         {
@@ -186,5 +185,6 @@ namespace App15
                 this.hideLinesCommand = value;
             }
         }
+
     }
 }

@@ -37,7 +37,6 @@ namespace App15
             this.InitializeComponent();
             this.ViewModel = new LinesViewModel();
             DataContext = ViewModel;
-
         }
 
         private void mapLoaded(object sender, RoutedEventArgs e)

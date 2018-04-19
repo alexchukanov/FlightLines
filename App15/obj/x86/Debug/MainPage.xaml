@@ -12,13 +12,12 @@
     <Grid x:ConnectionId='2' x:Name="pageGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto"/>           
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Maps:MapControl x:ConnectionId='3'
-           x:Name="map"            
-           ZoomInteractionMode="GestureAndControl"
-           TiltInteractionMode="GestureAndControl" 
+           x:Name="map"   
            MapServiceToken="use your own key"
                                          
                                                                  
@@ -51,8 +50,8 @@
                 <ComboBoxItem IsSelected="True">Web Mercator</ComboBoxItem>
                 <ComboBoxItem>Globe</ComboBoxItem>
             </ComboBox>
-            
         </StackPanel>
+        <TextBlock Text="{Binding Message, Mode=TwoWay}" Grid.Row="2" Margin="10 5 5 5" />
     </Grid>
 </Page>
 

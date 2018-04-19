@@ -49,4 +49,12 @@ namespace App15
         public string format_bottom { get; set; }
     }
 
+    public enum NotifyType
+    {
+        NoMessage,
+        StatusMessage,
+        InfoMessage,
+        ErrorMessage
+    };
+
 }
