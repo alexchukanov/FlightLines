@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -45,66 +46,94 @@ namespace App15
         {
             get;
             set;            
-        } 
+        }      
 
         Feature[] featureArr = null;
-        int maxNumberLines = 18000;
+        int moreNumberLines = 4000;
+        int totalNumberLines = 0;
+
+        List<string> featureIdList = null;
 
         public LinesViewModel()
         {
            MapLinesLayer = new ObservableCollection<MapLayer>();
+           featureIdList = new List<string>(moreNumberLines * 4);
         }
                
         private async void LoadLines(object linesN)
         {
-            int.TryParse((string)linesN, out maxNumberLines);            
+            int.TryParse((string)linesN, out moreNumberLines);
 
-            FileOpenPicker openPicker = new FileOpenPicker();
-            openPicker.ViewMode = PickerViewMode.Thumbnail;
-            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            openPicker.FileTypeFilter.Add(".geojson");
-
-            StorageFile file = await openPicker.PickSingleFileAsync();
-
-            if (file != null)
+            if (totalNumberLines == 0)
             {
-                IsWaiting = true;
+                FileOpenPicker openPicker = new FileOpenPicker();
+                openPicker.ViewMode = PickerViewMode.Thumbnail;
+                openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+                openPicker.FileTypeFilter.Add(".geojson");
 
-                string text = await Windows.Storage.FileIO.ReadTextAsync(file);
+                StorageFile file = await openPicker.PickSingleFileAsync();
 
-                var responseStatus = Newtonsoft.Json.JsonConvert.DeserializeObject<Rootobject>(text);
+                if (file != null)
+                {
+                    IsWaiting = true;
 
-                featureArr = responseStatus.features;
+                    string text = await Windows.Storage.FileIO.ReadTextAsync(file);
 
+                    if (featureArr == null)
+                    {
+                        try
+                        {
+                            var responseStatus = Newtonsoft.Json.JsonConvert.DeserializeObject<Rootobject>(text);
+                            featureArr = responseStatus.features;
+                        }
+                        catch
+                        {
+                            Message = "Select TRA file!";
+                        }                        
+                    }
+                }
+            }
+
+            if (featureArr != null)
+            { 
                 int i = 0;
 
                 var mapElementList = new List<MapElement>();
 
                 foreach (var feature in featureArr)
                 {
-                    MapElement mapPolyline = new MapPolyline
-                    {
-                        Path = new Geopath(new List<BasicGeoposition>
+                        if (featureIdList.Contains(feature.properties.id))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            featureIdList.Add(feature.properties.id);
+                        }
+
+                        MapElement mapPolyline = new MapPolyline
+                        {
+                            Path = new Geopath(new List<BasicGeoposition>
                         {
                             new BasicGeoposition() {Latitude=feature.geometry.coordinates[0][1], Longitude=feature.geometry.coordinates[0][0]},
                             new BasicGeoposition() {Latitude=feature.geometry.coordinates[1][1], Longitude=feature.geometry.coordinates[1][0]},
                         }),
 
-                        StrokeColor = Colors.DarkBlue,
-                        StrokeThickness = 1,
-                        StrokeDashed = true,
-                    };
+                            StrokeColor = Colors.DarkBlue,
+                            StrokeThickness = 1.5,
+                            StrokeDashed = true,
+                        };
 
-                    mapElementList.Add(mapPolyline);
+                        mapElementList.Add(mapPolyline);
 
-                    if (i++ > maxNumberLines)
-                    {
-                        IsWaiting = false;
-                        break;
-                    }
+                        totalNumberLines++;
+
+                        if (i++ >= moreNumberLines - 1)
+                        {
+                            IsWaiting = false;
+                            break;
+                        }
                 }
-
-                MapLinesLayer.Clear();
                 
                 var LandmarksLayer = new MapElementsLayer
                 {
@@ -113,6 +142,8 @@ namespace App15
                 };
                 
                 MapLinesLayer.Add(LandmarksLayer);
+
+                Message = $"Shown lines N = {totalNumberLines}";
             }
 
             IsWaiting = false;
@@ -138,8 +169,12 @@ namespace App15
                 
         private void ClearLines()
         {
+            totalNumberLines = 0;
+            featureIdList.Clear();
             MapLinesLayer.Clear();
             GC.Collect();
+                       
+            Message = $"Shown lines N = {totalNumberLines}";
         }
                 
         private RelayCommand clearLinesCommand;
@@ -159,32 +194,5 @@ namespace App15
                 this.clearLinesCommand = value;
             }
         }
-
-        private void HideLines()
-        {  
-            if (MapLinesLayer.Count() > 0)
-            {
-                MapLinesLayer[0].Visible = !MapLinesLayer[0].Visible;               
-            }            
-        }
-
-        private RelayCommand hideLinesCommand;
-        public RelayCommand HideLinesCommand
-        {
-            get
-            {
-                if (hideLinesCommand == null)
-                {
-                    hideLinesCommand = new RelayCommand(HideLines);
-                }
-
-                return this.hideLinesCommand;
-            }
-            set
-            {
-                this.hideLinesCommand = value;
-            }
-        }
-
     }
 }

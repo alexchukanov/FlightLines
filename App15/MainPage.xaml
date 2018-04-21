@@ -28,10 +28,9 @@
         </Maps:MapControl>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <Button Content="Load" Margin="5"  Command="{x:Bind ViewModel.LoadLinesCommand}" CommandParameter="{Binding ElementName=tbMaxNumber, Path=Text}"/>
-            <TextBox Name="tbMaxNumber" Text="18000" Margin="5" Height="25"/>
-            <TextBlock Text="max TRA lines" Margin="5" VerticalAlignment="Center"/>
-            <ToggleButton Content="Hide" Margin="5"  Command="{x:Bind ViewModel.HideLinesCommand}" IsChecked="True"/>
+            <Button Content="Load more +" Margin="5"  Command="{x:Bind ViewModel.LoadLinesCommand}" CommandParameter="{Binding ElementName=tbMaxNumber, Path=Text}"/>
+            <TextBox Name="tbMaxNumber" Text="4000" Margin="5" Height="25"/>
+            <TextBlock Text="TRA lines" Margin="5" VerticalAlignment="Center"/>            
             <Button Content="Clear" Margin="5"  Command="{x:Bind  ViewModel.ClearLinesCommand}"/>
             <ComboBox Header="Style" Name="styleCombobox" SelectionChanged="styleCombobox_SelectionChanged" Margin="10 0 0 25" VerticalAlignment="Top">
                 <ComboBoxItem>None</ComboBoxItem>
