@@ -51,13 +51,13 @@ namespace App15
         Feature[] featureArr = null;
         int moreNumberLines = 4000;
         int totalNumberLines = 0;
-
-        List<string> featureIdList = null;
+               
+        HashSet<string> featureIdList = null;
 
         public LinesViewModel()
         {
-           MapLinesLayer = new ObservableCollection<MapLayer>();
-           featureIdList = new List<string>(moreNumberLines * 4);
+           MapLinesLayer = new ObservableCollection<MapLayer>();          
+           featureIdList = new HashSet<string>(moreNumberLines * 4);
         }
                
         private async void LoadLines(object linesN)

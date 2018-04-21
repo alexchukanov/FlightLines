@@ -31,13 +31,13 @@
     <AppXManifest Include="C:\UWPprojects\FlightLines\App15\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2018-04-21T12:20:05.683</Modified>
+      <Modified>2018-04-21T12:38:52.615</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\UWPprojects\FlightLines\App15\bin\x86\Debug\App15.exe">
       <PackagePath>entrypoint\App15.exe</PackagePath>
-      <Modified>2018-04-21T12:20:04.984</Modified>
+      <Modified>2018-04-21T12:38:51.566</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\alexc\.nuget\packages\newtonsoft.json\11.0.2\lib\netstandard2.0\Newtonsoft.Json.dll">
       <PackagePath>Newtonsoft.Json.dll</PackagePath>
@@ -760,11 +760,11 @@
     <AppxPackagedFile Include="C:\UWPprojects\FlightLines\App15\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2018-04-21T12:20:05.381</Modified>
+      <Modified>2018-04-21T12:38:52.217</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\UWPprojects\FlightLines\App15\bin\x86\Debug\Core\App15.exe">
       <PackagePath>App15.exe</PackagePath>
-      <Modified>2018-04-21T12:20:05.679</Modified>
+      <Modified>2018-04-21T12:38:52.607</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
