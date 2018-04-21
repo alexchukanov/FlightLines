@@ -28,8 +28,11 @@
         </Maps:MapControl>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <Button x:ConnectionId='4' Content="Load more +" Margin="5"                                                CommandParameter="{Binding ElementName=tbMaxNumber, Path=Text}"/>
-            <TextBox x:ConnectionId='5' Name="tbMaxNumber" Text="4000" Margin="5" Height="25"/>
+
+            <TextBlock  Text="Load" Margin="5" Height="25"/>
+            <Button x:ConnectionId='4' Content="&#xE109;" Margin="5" FontFamily="Segoe MDL2 Assets"                                               />
+
+            <TextBox x:ConnectionId='5' Name="tbMaxNumber"                                                 Margin="5" Height="25"/>
             <TextBlock Text="TRA lines" Margin="5" VerticalAlignment="Center"/>            
             <Button x:ConnectionId='6' Content="Clear" Margin="5"                                                 />
             <ComboBox x:ConnectionId='7' Header="Style" Name="styleCombobox"                                                   Margin="10 0 0 25" VerticalAlignment="Top">

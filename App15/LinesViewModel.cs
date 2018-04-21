@@ -42,6 +42,19 @@ namespace App15
             }
         }
 
+        string linesNum = "";
+        public string LinesNum
+        {
+            get
+            {
+                return linesNum;
+            }
+            set
+            {
+                Set(ref linesNum, value);
+            }
+        }
+
         public ObservableCollection<MapLayer> MapLinesLayer
         {
             get;
@@ -49,20 +62,24 @@ namespace App15
         }      
 
         Feature[] featureArr = null;
-        int moreNumberLines = 4000;
+        
         int totalNumberLines = 0;
-               
-        HashSet<string> featureIdList = null;
+        int moreNumberLines = 4000;
+
+       HashSet<string> featureIdList = null;
 
         public LinesViewModel()
         {
+           LinesNum = "4000";
+           int.TryParse((string)linesNum, out moreNumberLines);
+
            MapLinesLayer = new ObservableCollection<MapLayer>();          
            featureIdList = new HashSet<string>(moreNumberLines * 4);
         }
                
-        private async void LoadLines(object linesN)
+        private async void LoadLines()
         {
-            int.TryParse((string)linesN, out moreNumberLines);
+            int.TryParse((string)linesNum, out moreNumberLines);
 
             if (totalNumberLines == 0)
             {
@@ -120,7 +137,7 @@ namespace App15
                         }),
 
                             StrokeColor = Colors.DarkBlue,
-                            StrokeThickness = 1.5,
+                            StrokeThickness = 2,
                             StrokeDashed = true,
                         };
 
@@ -149,14 +166,14 @@ namespace App15
             IsWaiting = false;
         }
 
-        private RelayCommand<string> loadLinesCommand;
-        public RelayCommand <string> LoadLinesCommand
+        private RelayCommand loadLinesCommand;
+        public RelayCommand LoadLinesCommand
         {
             get
             {
                 if (loadLinesCommand == null)
                 {   
-                   loadLinesCommand = new RelayCommand<string>(LoadLines);
+                   loadLinesCommand = new RelayCommand(LoadLines);
                 }
 
                 return this.loadLinesCommand;
